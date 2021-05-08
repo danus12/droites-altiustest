@@ -114,13 +114,14 @@ function animate() {
     const result = checkDroiteIntersection(droiteOne.fromX, droiteOne.fromY, droiteOne.toX, droiteOne.toY,
         droiteTwo.fromX, droiteTwo.fromY, droiteTwo.toX, droiteTwo.toY)
 
-    if (result.onDroiteOne && result.onDroiteTwo) {
+    if (result.onDroiteOne || result.onDroiteTwo) {
         trajectoireCourbe.push(new TrajectoireCourbe(result.x, result.y))
         //calcul de la distance entre deux points
         var a = planAxe.centerAxe.x - result.x;
         var b = planAxe.centerAxe.y - result.y;
         var c = Math.sqrt(a * a + b * b);
-        courbeEvolution.push(new TrajectoireCourbe(paddingTopForLines+(heightLine/2)+((courbeEvolution.length+1)*valuePixelContactNumber),(c+(heightLine/2)-paddingTopForLines)))
+        //(c+(heightLine/2)-paddingTopForLines))
+        courbeEvolution.push(new TrajectoireCourbe(paddingTopForLines+(heightLine/2)+((courbeEvolution.length+1)),c))
     } else {
         trajectoireCourbe.push(undefined)
     }
@@ -191,11 +192,9 @@ function checkDroiteIntersection(line1StartX, line1StartY, line1EndX, line1EndY,
     if (a > 0 && a < 1) {
         result.onDroiteOne = true;
     }
-    // if line2 is a segment and line1 is infinite, they intersect if:
     if (b > 0 && b < 1) {
         result.onDroiteTwo = true;
     }
-    // if line1 and line2 are segments, they intersect if both of the above are true
     return result;
 };
 
