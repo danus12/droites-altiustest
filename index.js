@@ -117,11 +117,12 @@ function animate() {
     if (result.onDroiteOne || result.onDroiteTwo) {
         trajectoireCourbe.push(new TrajectoireCourbe(result.x, result.y))
         //calcul de la distance entre deux points
-        var a = planAxe.centerAxe.x - result.x;
-        var b = planAxe.centerAxe.y - result.y;
+        var a = result.x - planAxe.centerAxe.x;
+        var b = result.y - planAxe.centerAxe.y;
         var c = Math.sqrt(a * a + b * b);
+        console.log(c);
         //(c+(heightLine/2)-paddingTopForLines))
-        courbeEvolution.push(new TrajectoireCourbe(paddingTopForLines+(heightLine/2)+((courbeEvolution.length+1)),c))
+        courbeEvolution.push(new TrajectoireCourbe(paddingTopForLines+(heightLine/2)+((courbeEvolution.length+1)),(height/2)-c))
     } else {
         trajectoireCourbe.push(undefined)
     }
